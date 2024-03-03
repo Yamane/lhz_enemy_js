@@ -1,0 +1,20 @@
+{
+  "name": "lhz_enemy_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/lhz_enemy.js",
+    "start-ts": "ts-node src/main.ts",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,0 +1,140 @@
+
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>ログ・ホライズンTRPG エネミー諸数値計算ツール</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<main>
+<div class="container">
+  <h3 class="text-center">ログ・ホライズンTRPG<br/>エネミー諸数値計算ツール</h3>
+<div  id="enemyApp" v-cloak>
+<div class="container">
+<hr class="mt-2"/>
+<div class="row">
+    <div class="col-sm-2 form-group">
+        <label for="cr">キャラクターランク</label>
+        <select id="cr" class="form-control" v-model="input.cr" @change="changeCr(input.cr)">
+          <option v-for="cr in setting.crList" :value="cr">CR{{ cr }}</option>
+        </select>
+    </div>
+    <div class="col-sm-4 form-group">
+        <label for="type">エネミータイプ</label>
+        <select id="type" class="form-control" v-model="input.type" @change="changeType(input.type)">
+            <option v-for="type in setting.typeList" :value="type">{{ type.label }}</option>
+        </select>
+    </div>
+    <div class="col-sm-2 form-group">
+        <label for="popularity">知名度</label>
+        <select id="popularity" class="form-control" v-model="input.popularity" @change="changePopularity(input.popularity)">
+            <option v-for="popularity in setting.popularityList" :value="popularity">{{ popularity.label }}</option>
+        </select>
+    </div>
+    <div class="col-sm-2 form-group">
+        <label for="rank">ランク</label>
+        <select id="rank" class="form-control" v-model="input.rank" @change="changeRank(input.rank)">
+            <option v-for="rank in setting.rankList" :value="rank">{{ rank.label }}</option>
+        </select>
+    </div>
+    <div class="col-sm-2 form-group">
+        <label for="race">大種族</label>
+        <select id="race" class="form-control" v-model="input.race" @change="changeRace(input.race)">
+            <option v-for="race in setting.raceList" :value="race">{{ race.label }}</option>
+        </select>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-12">
+        <h5>
+            {{ enemy.getType().label }}　CR：{{enemy.getCharacterRank()}}
+            <template v-for="tag in enemy.getTags()">
+                &nbsp;<span class="badge badge-secondary">{{ tag }}</span>
+            </template>
+        </h5>
+        <p>{{enemy.getFunction()}}</p>
+        <p></p>
+    </div>
+    <div class="col-sm-12 mt-3">
+        <div>▼能力値</div>
+        <div>【STR】{{enemy.getStr()}}　【DEX】{{enemy.getDex()}}　【POW】{{enemy.getPow()}}　【INT】{{enemy.getInt()}}</div>
+        <div>【回避】{{enemy.getAvoid()}}　【抵抗】{{enemy.getResist()}}　【物理防御力】{{enemy.getPhysicalDefense()}}　【魔法防御力】{{enemy.getMagicDefense()}}</div>
+        <div>【最大ＨＰ】{{enemy.getHitPoint()}}　【ヘイト倍率】{{enemy.getHate()}}　【行動力】{{enemy.getAction()}}　【移動力】{{enemy.getMove()}}</div>
+        <div>【識別難易度】{{enemy.getDifficulty()}}</div>
+    </div>
+    <div class="col-sm-12 mt-3">
+        <div>▼特技</div>
+        <template v-for="skill in enemy.getSkills()">
+            <div>{{ skill.toString() }}</div>
+            <div class="remarks" v-if="skill.getRemarks() != null">※{{ skill.getRemarks() }}</div>
+        </template>
+    </div>
+    <div class="col-sm-12 mt-3">
+        <div>▼ドロップ品</div>
+        ドロップ期待値：{{enemy.getGold()}}G
+    </div>
+</div>
+</div>
+</div>
+<div class="mb-5"></div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="dist/lhz_enemy.js"></script>
+<script>
+var enemyApp = new Vue({
+    el: '#enemyApp',
+    data: {
+        setting: {
+            typeList: EnemyType.values,
+            crList: [30],
+            popularityList: Popularity.values,
+            rankList: EnemyRank.values,
+            raceList: EnemyRace.values,
+        },
+        input: {
+            cr: null,
+            type: null,
+            popularity: null,
+            rank: null,
+            race: null,
+        },
+        enemy: null,
+    },
+    methods: {
+        changeCr(cr) {
+            this.enemy.setCharacterRank(cr);
+        },
+        changeType(type) {
+            this.enemy.setType(type);
+        },
+        changePopularity(pop) {
+            this.enemy.setPopularity(pop);
+        },
+        changeRank(rank) {
+            this.enemy.setRank(rank);
+        },
+        changeRace(race) {
+            this.enemy.setRace(race);
+        },
+    },
+    created() {
+        this.enemy = new Enemy();
+        this.input.cr = this.enemy.getCharacterRank();
+        this.input.type = this.enemy.getType();
+        this.input.popularity = this.enemy.getPopularity();
+        this.input.rank = this.enemy.getRank();
+        this.input.race = this.enemy.getRace();
+        for (let i = 0; i < 30; i++) {
+            this.setting.crList[i] = i + 1;
+        }
+    }
+});
+</script>
+</body>
+</html>
