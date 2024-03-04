@@ -7,14 +7,17 @@
     "start": "node dist/lhz_enemy.js",
     "start-ts": "ts-node src/main.ts",
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "doc": "typedoc --entryPointStrategy expand ./src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "private": true,
   "devDependencies": {
     "@types/node": "^20.11.21",
     "ts-node": "^10.9.2",
+    "typedoc": "^0.25.10",
     "typescript": "^5.3.3"
   }
 }
