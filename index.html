@@ -85,17 +85,17 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="dist/lhz_enemy.js"></script>
+<script src="./dist/lhz_enemy.js"></script>
 <script>
 var enemyApp = new Vue({
     el: '#enemyApp',
     data: {
         setting: {
-            typeList: EnemyType.values,
+            typeList: EnemyType.getValues(),
             crList: [30],
-            popularityList: Popularity.values,
-            rankList: EnemyRank.values,
-            raceList: EnemyRace.values,
+            popularityList: Popularity.getValues(),
+            rankList: EnemyRank.getValues(),
+            raceList: EnemyRace.getValues(),
         },
         input: {
             cr: null,
