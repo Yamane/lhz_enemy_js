@@ -30,12 +30,6 @@
         </select>
     </div>
     <div class="col-sm-2 form-group">
-        <label for="popularity">知名度</label>
-        <select id="popularity" class="form-control" v-model="input.popularity" @change="changePopularity(input.popularity)">
-            <option v-for="popularity in setting.popularityList" :value="popularity">{{ popularity.label }}</option>
-        </select>
-    </div>
-    <div class="col-sm-2 form-group">
         <label for="rank">ランク</label>
         <select id="rank" class="form-control" v-model="input.rank" @change="changeRank(input.rank)">
             <option v-for="rank in setting.rankList" :value="rank">{{ rank.label }}</option>
@@ -45,6 +39,12 @@
         <label for="race">大種族</label>
         <select id="race" class="form-control" v-model="input.race" @change="changeRace(input.race)">
             <option v-for="race in setting.raceList" :value="race">{{ race.label }}</option>
+        </select>
+    </div>
+    <div class="col-sm-2 form-group">
+        <label for="popularity">知名度</label>
+        <select id="popularity" class="form-control" v-model="input.popularity" @change="changePopularity(input.popularity)">
+            <option v-for="popularity in setting.popularityList" :value="popularity">{{ popularity.label }}</option>
         </select>
     </div>
 </div>

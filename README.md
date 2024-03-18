@@ -12,13 +12,13 @@ let enemy = new Enemy();
 // キャラクターランクを設定
 enemy.setCharacterRank(9);
 // エネミータイプを設定
-enemy.setEnemyType(9);
-// 知名度を設定
-enemy.setPopularity(9);
+enemy.setEnemyType(EnemyType.ARMOROR);
 // エネミーランクを設定
-enemy.setRank(9);
+enemy.setRank(EnemyRank.NORMAL);
 // 大種族を設定
-enemy.setRace(9);
+enemy.setRace(EnemyRace.DEMI_HUMAN);
+// 知名度を設定
+enemy.setPopularity(Popularity.R1);
 
 // 出力
 console.log(enemy.getName());
